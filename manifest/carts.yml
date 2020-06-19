@@ -21,7 +21,7 @@ spec:
         - name: DT_TAGS
           value: "product=sockshop product=sockshop BACKEND Owner=Alex"
         - name: DT_CUSTOM_PROP
-          value: "${BUILD_NUMBER}"
+          value: "SERVICE_TYPE-BACKEND Owner=Alex CostCenter=Dynatrace"
         resources:
           limits:
             cpu: 500m
