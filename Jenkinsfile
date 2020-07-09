@@ -24,8 +24,6 @@ pipeline {
     TAG_DEV = "${env.TAG}-${env.VERSION}-${env.BUILD_NUMBER}"
     TAG_STAGING = "${env.TAG}-${env.VERSION}"
     DT_CUSTOM_PROP = "${env.BUILD_NUMBER}"
-    AZURE_CRED_ID = "7e4620ac-c123-4f18-9a26-e4bfd096f912"
-    RES_GROUP = "Dynatrace_ACM"
   }
   stages {
     stage('Maven build') {
