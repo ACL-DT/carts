@@ -24,8 +24,6 @@ pipeline {
     TAG_DEV = "${env.TAG}-${env.VERSION}-${env.BUILD_NUMBER}"
     TAG_STAGING = "${env.TAG}-${env.VERSION}"
     DT_CUSTOM_PROP = "${env.BUILD_NUMBER}"
-    sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
-    sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
   }
   stages {
     stage('Maven build') {
