@@ -18,6 +18,7 @@ withCredentials([azureServicePrincipal('adarby006')]) {
             sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
         }
 }
+}
 pipeline {
   agent {
     label 'maven'
@@ -199,5 +200,4 @@ pipeline {
       }
     }
   }
-}
 }
