@@ -11,14 +11,6 @@ def tagMatchRules = [
     ]
   ]
 ]
-node {
-withCredentials([azureServicePrincipal('adarby006')]){
-    stage('Prepare Environment') {
-        sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
-        sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
-}
-}
-}
 pipeline {
   agent {
     label 'maven'
@@ -32,6 +24,14 @@ pipeline {
     TAG_STAGING = "${env.TAG}-${env.VERSION}"
     DT_CUSTOM_PROP = "${env.BUILD_NUMBER}"
   }
+  node {
+withCredentials([azureServicePrincipal('adarby006')]){
+    stage('Prepare Environment') {
+        sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+        sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
+}
+}
+}
   stages {
     stage('Maven build') {
       steps {
