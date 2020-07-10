@@ -2,7 +2,7 @@
 
 def creds = [
   azureServicePrincipal(params.SERVICE_PRINICPAL)
-  
+  ]
 def tagMatchRules = [
   [
     meTypes: [
