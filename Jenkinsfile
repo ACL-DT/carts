@@ -23,6 +23,7 @@ pipeline {
     TAG = "${env.DOCKER_REGISTRY_URL}:5000/library/${env.ARTEFACT_ID}"
     TAG_DEV = "${env.TAG}-${env.VERSION}-${env.BUILD_NUMBER}"
     TAG_STAGING = "${env.TAG}-${env.VERSION}"
+    DT_CUSTOM_PROP = "${env.BUILD_NUMBER}"
   }
   stages {
     stage('Maven build') {
@@ -70,6 +71,26 @@ pipeline {
         }
       }
     }
+    stage('DT Deploy Event') {
+  when {
+      expression {
+      return env.BRANCH_NAME ==~ 'release/.*' || env.BRANCH_NAME ==~'master'
+      }
+  }
+  steps {
+    container("curl") {
+      script {
+        def status = pushDynatraceDeploymentEvent (
+          tagRule : tagMatchRules,
+          customProperties : [
+            [key: 'Jenkins Build Number', value: "${env.BUILD_ID}"],
+            [key: 'Git commit', value: "${env.GIT_COMMIT}"]
+          ]
+        )
+      }
+    }
+  }
+}
     stage('Run health check in dev') {
       when {
         expression {
