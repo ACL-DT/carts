@@ -173,9 +173,10 @@ pipeline {
       }
       steps {
         container('docker'){
-          az arc login -n adarby005
-          sh "docker tag ${env.TAG_DEV} ${env.TAG_STAGING}"
-          sh "docker push ${env.TAG_STAGING}"
+          sh "az acr login -n adarby005"
+          sh "docker tag ${env.TAG_DEV} adarby005.azurecr.io/${env.TAG_STAGING}"
+          sh "docker push adarby005.azurecr.io/${env.TAG_STAGING}"
+
         }
       }
     }
