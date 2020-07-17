@@ -172,6 +172,9 @@ pipeline {
         }
       }
       steps {
+        withCredentials([azureServicePrincipal('adarby006')]) {
+        sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+        }
         container('docker'){
           sh "az acr login -n adarby005"
           sh "docker tag ${env.TAG_DEV} adarby005.azurecr.io/${env.TAG_STAGING}"
