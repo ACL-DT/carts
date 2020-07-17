@@ -37,9 +37,6 @@ pipeline {
       }
     }
     stage('Docker build') {
-        container('docker'){
-          sh "az acr login -n adarby005 -u adarby005 -p zR+9Zs=8XQnLebQOoqtPuKBjtgPV4Pa6"
-        }
       when {
         expression {
           return env.BRANCH_NAME ==~ 'release/.*' || env.BRANCH_NAME ==~'master'
@@ -52,9 +49,6 @@ pipeline {
       }
     }
     stage('Docker push to registry'){
-        container('docker'){
-          sh "az acr login -n adarby005 -u adarby005 -p zR+9Zs=8XQnLebQOoqtPuKBjtgPV4Pa6"
-        }
       when {
         expression {
           return env.BRANCH_NAME ==~ 'release/.*' || env.BRANCH_NAME ==~'master'
