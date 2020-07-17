@@ -37,10 +37,6 @@ pipeline {
       }
     }
     stage('Docker build') {
-      steps {
-        withCredentials([azureServicePrincipal('adarby006')]) {
-        sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
-        }
         container('docker'){
           sh "az acr login -n adarby005 -u adarby005 -p zR+9Zs=8XQnLebQOoqtPuKBjtgPV4Pa6"
         }
@@ -56,10 +52,6 @@ pipeline {
       }
     }
     stage('Docker push to registry'){
-      steps {
-        withCredentials([azureServicePrincipal('adarby006')]) {
-        sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
-        }
         container('docker'){
           sh "az acr login -n adarby005 -u adarby005 -p zR+9Zs=8XQnLebQOoqtPuKBjtgPV4Pa6"
         }
@@ -214,5 +206,4 @@ pipeline {
       }
     }
   }
-}
 }
