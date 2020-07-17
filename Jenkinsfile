@@ -22,7 +22,7 @@ pipeline {
     APP_NAME = "carts"
     VERSION = readFile('version').trim()
     ARTEFACT_ID = "sockshop/" + "${env.APP_NAME}"
-    TAG = "${env.DOCKER_REGISTRY_URL}:5000/library/${env.ARTEFACT_ID}"
+    TAG = "adarby005.azurecr.io/library/${env.ARTEFACT_ID}"
     TAG_DEV = "${env.TAG}-${env.VERSION}-${env.BUILD_NUMBER}"
     TAG_STAGING = "${env.TAG}-${env.VERSION}"
     DT_CUSTOM_PROP = "${env.BUILD_NUMBER}"
