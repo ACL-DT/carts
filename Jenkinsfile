@@ -18,9 +18,6 @@ pipeline {
   agent {
     label 'maven'
   }
-  def creds = [
-  azureServicePrincipal(params.adarby006)
-  ]
   environment {
     APP_NAME = "carts"
     VERSION = readFile('version').trim()
