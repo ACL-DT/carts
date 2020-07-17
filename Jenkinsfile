@@ -18,6 +18,9 @@ pipeline {
   agent {
     label 'maven'
   }
+  def creds = [
+  azureServicePrincipal(params.adarby006)
+  ]
   environment {
     APP_NAME = "carts"
     VERSION = readFile('version').trim()
@@ -173,6 +176,7 @@ pipeline {
       }
       steps {
         container('docker'){
+          az arc login -n adarby005
           sh "docker tag ${env.TAG_DEV} ${env.TAG_STAGING}"
           sh "docker push ${env.TAG_STAGING}"
         }
